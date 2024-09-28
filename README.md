@@ -16,3 +16,9 @@
   1. 在有一个本地库的前提下，再使用 vi 创建一个新文件，git status 会显示Untracked file
   2. 使用 git add 后会出现 Changes not staged for commit
   3. 使用 git commit 后会出现 no changes added to commit
+  ## git pull & git push:
+  1. 要想将github 中最新的版本拉取到本地进行操作，先 git pull origin master
+  2. 此时将更改的文件 push 到github 上则会出现 **冲突**，要先解决冲突
+  3. 使用 cat 命令查看不同 ，再使用 vi 去修改保留你所需要的内容
+  4. 再 git add ,git commit -m ""
+  5. 最后 git push origin master
