@@ -30,7 +30,7 @@
   2. git log --pretty=oneline 可以只查看 版本号
   3. 在git中，head指向当前版本，head^ 指向上一版本
   4. 可以使用 git reset --hard head^ 回到上一版本，或者直接 --hard 版本号回到任意版本，最新版本的版本号可以到上面 git log 命令找
-  5. 若将git 关闭了，可以使用 git relog 查看之前的所有命令
+  5. 若将git 关闭了，可以使用 git reflog 查看之前的所有命令
 
   ## 工作区和暂存区
    使用 vi 新建修改文件后，使用git add 就将文件放到暂存区中，等所有文件操作完毕后，使用 git commit -m 统一提交
@@ -56,3 +56,27 @@
   1. 先在本地创建一个新的文件夹
   2. cd 该文件夹
   3. git clone 仓库地址，就将代码 fork到该文件夹
+ # 分支管理
+  ## 创建与合并分支
+  1. git checkout -b 新分支，表示创建并切换到该分支，相当于git branch 分支+ git checkout 分支，注意：**git branch** 表示显示所有的分支
+  2. 假设现在已经切换到新的分支 dev,此时可以在dev分支上进行 git add 和 git commit -m 命令
+  3. dev上的操作完成后，git checkout master 回到主分支，git merge dev将该分支合并到 master分支上
+  4. 此时便可以使用 git branch -d dev 将dev分支删除
+  5. 还可以使用 git switch -c dev 来创建并切换到新的dev分支，git switch master 切换到已有的分支
+  ## bug 分支
+  1. 当你在dev工作时，想起master分支上还有一个bug,但是在dev上的工作还未完成，并不想提交，此时你可以 git stash ,将你工作区的内容隐藏起来
+  2. 此时，git checkout master回到master分支 ，git checkout -b bug 创建一个bug分支去修复它，git merge bug 就可以修复bug
+  3. 此时git checkout dev 回到dev分支，git stash list 查看刚才的工作
+  4. git stash apply 恢复，但恢复后，stash 的内容并不会删除，需要 git stash drop来删除；另一种方法是 git stash pop,回复的同时把 stash内容也删除
+  5. stash 多个工作时，先用git stash list 查看，然后恢复指定的stash
+  6. 因为dev是master上延伸的分支，所以dev上也有bug,但是只需要 git cherry-pick <bug 分支提交的版本号>
+  7. 也可以直接在dev上改bug，再在master分支上  git cherry-pick <bug 分支提交的版本号>
+ # 标签管理
+  ## 创建标签
+  1. 切换到需要打标签的分支上 git tag <name>
+  2. git tag 查看所有标签
+  3. git tag <commit的版本号>
+  4. git tag -a <name> -m "注释" 创建有说明文字的标签
+  ## 操作标签
+  1. git tag -d <name> 删除本地标签，git push origin :refs/tags/<tagname>删除远程库的标签
+  2. git push origin <tagname> 推送到远程 ，git push origin --tags将所有标签推送到远程
