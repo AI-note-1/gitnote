@@ -9,7 +9,7 @@
  - 1.在 git上使用touch 命令直接创建文件 **touch是linux的命令，可以直接创建一个文件**
  - 2.使用 vi/vim 命令创建文件，可以直接写内容，按下 i 进入输入模式，按下 esc 退出输入，按下 shift+: wq 保存内容返回 git bash **VIM/VI是linux里面命令行下的代码编辑器，可以用来创建修改代码**
  6. 使用git add file 提交到暂存区
- 7. git commit -m "注释"
+ 7. git commit -m "注释", **注意：-m参数不可以省略，否则会提示error**
 
  # 对分支和文件操作:
 
@@ -80,3 +80,4 @@
   ## 操作标签
   1. git tag -d <name> 删除本地标签，git push origin :refs/tags/<tagname>删除远程库的标签
   2. git push origin <tagname> 推送到远程 ，git push origin --tags将所有标签推送到远程
+
